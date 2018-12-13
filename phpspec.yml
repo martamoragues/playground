@@ -1,0 +1,8 @@
+bootstrap: "tests/Spec/bootstrap.php"
+suites:
+    config:
+        namespace: App
+        spec_prefix: Spec
+        spec_path: "%paths.config%/tests"
+        psr4_prefix: App
+
