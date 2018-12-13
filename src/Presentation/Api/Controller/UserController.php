@@ -25,7 +25,7 @@ class UserController
 
     public function getAllUsers()
     {
-        $this->showUsersUseCase->execute();
+        var_dump($this->showUsersUseCase->execute());
         return new JsonResponse('esto funciona');
     }
 }

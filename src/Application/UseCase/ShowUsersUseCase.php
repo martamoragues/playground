@@ -18,6 +18,6 @@ class ShowUsersUseCase
 
     public function execute()
     {
-        var_dump($this->userRepository->getAll());
+        return $this->userRepository->getAll();
     }
 }
