@@ -5,3 +5,7 @@ index:
 sum:
     path: /marta/{elem1}/{elem2}
     defaults: { _controller: App\Presentation\Api\Controller\UserController::getSum }
+
+twig:
+    path: /twig
+    defaults: { _controller: App\Presentation\Api\Controller\UserController::showTwig }

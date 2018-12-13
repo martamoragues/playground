@@ -4,11 +4,12 @@ namespace App\Presentation\Api\Controller;
 
 use App\Application\UseCase\ShowUsersUseCase;
 use PHPUnit\Runner\Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController
+class UserController extends AbstractController
 {
 
     /**
@@ -48,4 +49,13 @@ class UserController
         }
         return new Response($elem1 + $elem2);
     }
+
+    public function showTwig()
+    {
+        return $this->render(
+            'custom.html.twig',
+            ['name' => 'hola']
+        );
+    }
 }
+
