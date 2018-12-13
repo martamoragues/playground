@@ -3,19 +3,28 @@ parameters:
     # This allows you to run cache:warmup even if your
     # environment variables are not available yet.
     # You should not need to change this value.
-    env(DATABASE_URL): ''
+    #env(DATABASE_URL): "mysql://root:root@127.0.0.1:3309/test"
 
 doctrine:
     dbal:
         # configure these for your database server
-        driver: 'pdo_mysql'
-        server_version: '5.7'
-        charset: utf8mb4
-        default_table_options:
-            charset: utf8mb4
-            collate: utf8mb4_unicode_ci
+      connections:
+        default:
+          driver:   'pdo_mysql'
+          dbname:   test
+          user:     root
+          host:     127.0.0.1
+          password: root
+          port: '3309'
 
-        url: '%env(resolve:DATABASE_URL)%'
+          server_version: '5.7'
+          charset: utf8mb4
+          default_table_options:
+              charset: utf8mb4
+              collate: utf8mb4_unicode_ci
+
+          #url: '%env(resolve:DATABASE_URL)%'
+
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -23,7 +32,7 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Domain'
+                type: yml
+                dir: '%kernel.project_dir%/config/doctrine'
                 prefix: 'App\Domain'
                 alias: App

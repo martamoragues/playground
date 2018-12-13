@@ -6,21 +6,36 @@
 parameters:
     locale: 'en'
 
+
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
+        public: true
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+    #repositories
+    App\Domain\User\UserRepository:
+        class: 'App\Infrastructure\User\DoctrineUserRepository'
+
+
+    #use cases
+    use_case.show_users:
+        class: App\Application\UseCase\ShowUserUseCase
+        arguments:
+            - App\Domain\User\UserRepository
+
+    app.user_controller:
+        class: App\Presentation\Api\Controller\UserController
+        arguments: ['@use_case.show_users']
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -39,3 +54,4 @@ services:
 
     App\Domain\:
         resource: '../src/Domain/*'
+

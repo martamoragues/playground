@@ -1,0 +1,19 @@
+App\Domain\User\User:
+  type: entity
+  repositoryClass: App\Infrastructure\User\DoctrineUserRepository
+  table: user
+  id:
+    id:
+      type: integer
+      unsigned: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+    email:
+      type: string
+
+  uniqueConstraints:
+        name_email_idx:
+            columns: name, email
